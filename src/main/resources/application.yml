@@ -1,0 +1,25 @@
+server:
+  port: ${PORT:8080}
+  servlet:
+    context-path: /
+
+# JPA - HIBERNATE - DB
+spring:
+  application:
+    name: match-manager
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  datasource:
+    url: jdbc:postgresql://${postgres.host:localhost}:5432/${postgres.db:match_manager}?currentSchema=public
+    username: ${postgres.user:crm_user}
+    password: ${postgres.password:crm_pass}
+    hikari:
+      maximum-pool-size: 10
