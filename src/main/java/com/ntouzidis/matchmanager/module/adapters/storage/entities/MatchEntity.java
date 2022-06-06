@@ -55,17 +55,34 @@ public class MatchEntity implements Serializable {
   private MatchOddsEntity odds;
 
 
-  public static MatchEntity fromDomain(Match newMatch) {
-    var newEntity = new MatchEntity();
-    newEntity.description = newMatch.getDescription();
-    newEntity.matchDate = newMatch.getMatchDate();
-    newEntity.matchTime = newMatch.getMatchTime();
-    newEntity.teamA = newMatch.getTeamA();
-    newEntity.teamB = newMatch.getTeamB();
-    newEntity.sport = newMatch.getSport();
-    newEntity.description = newMatch.getDescription();
+//  public static MatchEntity newFromDomain(Match newMatch) {
+//    var newEntity = new MatchEntity();
+//    newEntity.description = newMatch.getDescription();
+//    newEntity.matchDate = newMatch.getMatchDate();
+//    newEntity.matchTime = newMatch.getMatchTime();
+//    newEntity.teamA = newMatch.getTeamA();
+//    newEntity.teamB = newMatch.getTeamB();
+//    newEntity.sport = newMatch.getSport();
+//    newEntity.description = newMatch.getDescription();
+//
+//    var matchOddsEntity = new MatchOddsEntity(null, newEntity, newMatch.getSpecifier(), newMatch.getOdd());
+//    newEntity.setOdds(matchOddsEntity);
+//
+//    return newEntity;
+//  }
 
-    var matchOddsEntity = new MatchOddsEntity(null, newEntity, newMatch.getSpecifier(), newMatch.getOdd());
+  public static MatchEntity fromDomain(Match match, Long matchOddsId) {
+    var newEntity = new MatchEntity();
+    newEntity.id = match.getId();
+    newEntity.description = match.getDescription();
+    newEntity.matchDate = match.getMatchDate();
+    newEntity.matchTime = match.getMatchTime();
+    newEntity.teamA = match.getTeamA();
+    newEntity.teamB = match.getTeamB();
+    newEntity.sport = match.getSport();
+    newEntity.description = match.getDescription();
+
+    var matchOddsEntity = new MatchOddsEntity(matchOddsId, newEntity, match.getSpecifier(), match.getOdd());
     newEntity.setOdds(matchOddsEntity);
 
     return newEntity;

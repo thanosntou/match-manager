@@ -25,12 +25,11 @@ public class Match {
   private BigDecimal odd;
 
   /**
-   * Method for initializing a new domain object, ready to be persisted.
-   * Add all validations here.
+   * Method for initializing a new domain object, ready to be persisted. Add all validations here.
+   *
    * @return The domain object
    */
   public static Match createNew(
-      String description,
       @NonNull LocalDate matchDate,
       @NonNull LocalTime matchTime,
       @NonNull String teamA,
@@ -40,16 +39,19 @@ public class Match {
       @NonNull BigDecimal odd) {
 
     Preconditions.checkArgument(!teamA.equalsIgnoreCase(teamB), "The teams must be different");
-    Preconditions.checkArgument(odd.intValue() > 0, "The odd must be bigger than zero");
-    Preconditions.checkArgument(matchDate.isAfter(LocalDate.now()), "The match date must be tomorrow or later");
+    Preconditions.checkArgument(odd.doubleValue() > 1, "The odd must be bigger than 1");
+    Preconditions.checkArgument(matchDate.isAfter(LocalDate.now()),
+        "The match date must be tomorrow or later");
+
+    var description = String.format("%s-%s", teamA, teamB);
 
     return fromValues(null, description, matchDate, matchTime, teamA, teamB, sport, specifier, odd);
   }
 
   /**
-   * Method for converting a fetched entity to domain.
-   * No business rules required, since the data are already stored,
-   * and we are confident for their validity.
+   * Method for converting a fetched entity to domain. No business rules required, since the data
+   * are already stored, and we are confident for their validity.
+   *
    * @return The domain object
    */
   public static Match fromValues(
@@ -69,6 +71,30 @@ public class Match {
     entity.specifier = specifier;
     entity.odd = odd;
     return entity;
+  }
+
+  public void setMatchDate(LocalDate matchDate) {
+    Preconditions.checkArgument(matchDate.isAfter(LocalDate.now()),
+        "The match date must be tomorrow or later");
+    this.matchDate = matchDate;
+  }
+
+  public void setMatchTime(LocalTime matchTime) {
+    this.matchTime = matchTime;
+  }
+
+  public void setSport(String sport) {
+    this.sport = Sport.fromText(sport);
+  }
+
+  public void setSpecifier(String specifier) {
+    this.specifier = specifier;
+  }
+
+  public void setOdd(BigDecimal odd) {
+    Preconditions.checkArgument(odd.doubleValue() > 1,
+        "The odd must be bigger than 1");
+    this.odd = odd;
   }
 
 }

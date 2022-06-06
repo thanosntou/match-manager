@@ -1,6 +1,5 @@
-package com.ntouzidis.matchmanager.module.adapters.api.exception_handling;
+package com.ntouzidis.matchmanager.module.adapters.api.advice;
 
-import com.ntouzidis.matchmanager.module.adapters.exceptions.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,14 +14,20 @@ public class ControllerExceptionHandler {
 
   @ExceptionHandler(MissingServletRequestParameterException.class)
   public ResponseEntity<String> handleMissingRequestParam(Exception ex) {
-    log.info(ex.getMessage(), ex);
+    log.error(ex.getMessage(), ex);
     return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler(NotFoundException.class)
-  public ResponseEntity<String> handleNotFound(RuntimeException ex) {
-    log.info(ex.getMessage(), ex);
-    return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND);
+  @ExceptionHandler(IllegalArgumentException.class)
+  public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException ex) {
+    log.error(ex.getMessage(), ex);
+    return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(RuntimeException.class)
+  public ResponseEntity<String> handleIllegalArgument(RuntimeException ex) {
+    log.error(ex.getMessage(), ex);
+    return new ResponseEntity<>(ex.getMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
 }
