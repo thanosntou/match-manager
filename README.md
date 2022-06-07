@@ -13,9 +13,12 @@
 > http://localhost:8080/swagger-ui/index.html
 
 FYI
-In the request bodies, the matchTime can be written as "matchTime": "21:45:00".
-For the create api, all body fields are required.
-For the search api, all are optional.
+In the request bodies, the matchTime can be written as "matchTime": "21:45:00". 
+
+For the create api, all body fields are required.  
+
+For the search api, all are optional. Available search criteria:   
+[description, teamA, teamB, sport, matchDate, matchTime] 
 
 ### Example request for create:
 ```json
