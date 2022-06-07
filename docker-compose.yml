@@ -10,8 +10,8 @@ services:
       - PORT=8080
       - POSTGRES_HOST=postgres
       - POSTGRES_DB=match_manager
-      - POSTGRES_USER=crm_user
-      - POSTGRES_PASSWORD=crm_pass
+      - POSTGRES_USER=match_manager_user
+      - POSTGRES_PASSWORD=match_manager_pass
     volumes:
       - C://logs:/home/match-manager/logs
 
@@ -22,6 +22,6 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_DB: match_manager
-      POSTGRES_USER: crm_user
-      POSTGRES_PASSWORD: crm_pass
+      POSTGRES_USER: match_manager_user
+      POSTGRES_PASSWORD: match_manager_pass
 
