@@ -3,6 +3,7 @@ package com.ntouzidis.matchmanager.module.adapters.api.controller;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import com.ntouzidis.matchmanager.module.application.forms.CreateMatchForm;
+import com.ntouzidis.matchmanager.module.application.forms.SearchForm;
 import com.ntouzidis.matchmanager.module.application.forms.UpdateMatchForm;
 import com.ntouzidis.matchmanager.module.domain.aggregates.Match;
 import com.ntouzidis.matchmanager.module.application.service.MatchService;
@@ -26,6 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MatchController {
 
   private final MatchService matchService;
+
+  @PostMapping("/search")
+  public List<Match> search(@RequestBody @Valid SearchForm form) {
+    return matchService.search(form);
+  }
 
   @GetMapping
   public List<Match> getAll() {

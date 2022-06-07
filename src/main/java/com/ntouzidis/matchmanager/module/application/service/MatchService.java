@@ -1,6 +1,7 @@
 package com.ntouzidis.matchmanager.module.application.service;
 
 import com.ntouzidis.matchmanager.module.application.forms.CreateMatchForm;
+import com.ntouzidis.matchmanager.module.application.forms.SearchForm;
 import com.ntouzidis.matchmanager.module.application.forms.UpdateMatchForm;
 import com.ntouzidis.matchmanager.module.domain.aggregates.Match;
 import com.ntouzidis.matchmanager.module.domain.valueobjects.Sport;
@@ -18,6 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class MatchService {
 
   private final IMatchRepository matchRepository;
+
+  @Transactional(readOnly = true)
+  public List<Match> search(SearchForm form) {
+    return matchRepository.search(form);
+  }
 
   @Transactional(readOnly = true)
   public List<Match> getAll() {

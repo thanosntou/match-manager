@@ -54,23 +54,6 @@ public class MatchEntity implements Serializable {
   @OneToOne(mappedBy = "match", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
   private MatchOddsEntity odds;
 
-
-//  public static MatchEntity newFromDomain(Match newMatch) {
-//    var newEntity = new MatchEntity();
-//    newEntity.description = newMatch.getDescription();
-//    newEntity.matchDate = newMatch.getMatchDate();
-//    newEntity.matchTime = newMatch.getMatchTime();
-//    newEntity.teamA = newMatch.getTeamA();
-//    newEntity.teamB = newMatch.getTeamB();
-//    newEntity.sport = newMatch.getSport();
-//    newEntity.description = newMatch.getDescription();
-//
-//    var matchOddsEntity = new MatchOddsEntity(null, newEntity, newMatch.getSpecifier(), newMatch.getOdd());
-//    newEntity.setOdds(matchOddsEntity);
-//
-//    return newEntity;
-//  }
-
   public static MatchEntity fromDomain(Match match, Long matchOddsId) {
     var newEntity = new MatchEntity();
     newEntity.id = match.getId();
